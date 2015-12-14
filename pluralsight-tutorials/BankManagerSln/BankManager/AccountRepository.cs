@@ -8,19 +8,19 @@ namespace BankManager
 {
     public class AccountRepository
     {
-        private readonly List<int> _transactions = new List<int>();
+        private readonly List<Transaction> _transactions = new List<Transaction>();
 
-        public virtual void ProcessTransaction(int amount)
+        public virtual void ProcessTransaction(Transaction transaction)
         {
-            _transactions.Add(amount);
+            _transactions.Add(transaction);
         }
 
         public virtual int GetBalance()
         {
-            return _transactions.Sum();
+            return _transactions.Sum(x =>x.CalculateTotalTransaction());
         }
 
-        public virtual List<int> GetTransactions()
+        public virtual List<Transaction> GetTransactions()
         {
             return _transactions.Select(x => x).ToList();
         }

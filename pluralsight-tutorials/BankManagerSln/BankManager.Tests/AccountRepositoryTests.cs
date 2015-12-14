@@ -28,15 +28,15 @@ namespace BankManager.Tests
         [Test]
         public void ProcessTransaction_FirstTransaction_StoredTransactionsContainOnlyThatOne()
         {
-            const int depositAmount = 10;
+            var transaction = new SimpleTransaction(10);
 
-            _accountRepository.ProcessTransaction(depositAmount);
+            _accountRepository.ProcessTransaction(transaction);
 
             var transactions = _accountRepository.GetTransactions();
 
             Assert.That(transactions.Count, Is.EqualTo(1),
                 "First transaction should be stored in the transaction list.");
-            Assert.That(transactions.Single(), Is.EqualTo(depositAmount),
+            Assert.That(transactions.Single(), Is.EqualTo(transaction),
             "First transaction should return the same balance.");
         }
     }

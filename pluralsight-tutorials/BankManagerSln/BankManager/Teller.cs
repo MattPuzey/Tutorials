@@ -25,10 +25,10 @@ namespace BankManager
             return _accountRepository.GetBalance();
         }
             
-        public int ProcessTransaction(int amount)
+        public int ProcessTransaction(Transaction transaction)
         {
-            Logging.WriteLine("Processing a transaction of £" + amount);
-            _accountRepository.ProcessTransaction(amount);
+            Logging.WriteLine("Processing a transaction of £" + transaction.CalculateTotalTransaction());
+            _accountRepository.ProcessTransaction(transaction);
             return CheckBalance();  
         }
     }

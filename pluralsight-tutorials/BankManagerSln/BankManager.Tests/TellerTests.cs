@@ -41,11 +41,11 @@ namespace BankManager.Tests
         [Test]
         public void ProcessTransaction_TransactionValueGiven_TellerSubmitsGivenTransactionToTheRepository()
         {
-            const int depositAmount = 10;
+            var transaction = new SimpleTransaction(10);
 
-            var balance = _teller.ProcessTransaction(depositAmount);
+            _teller.ProcessTransaction(transaction);
 
-             Mock.Get(_accountRepository).Verify(x => x.ProcessTransaction(depositAmount), Times.Once(),
+             Mock.Get(_accountRepository).Verify(x => x.ProcessTransaction(transaction), Times.Once(),
                  "The Teller should forward the process transaction request to the repository.");
         }
 

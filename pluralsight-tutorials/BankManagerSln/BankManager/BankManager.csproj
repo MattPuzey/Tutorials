@@ -40,6 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountRepository.cs" />
+    <Compile Include="FeeTransaction.cs" />
+    <Compile Include="SimpleTransaction.cs" />
+    <Compile Include="Transaction.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Teller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
