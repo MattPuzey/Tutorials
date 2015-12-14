@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManager", "BankManager\BankManager.csproj", "{EB1EB3B3-E062-47A8-9932-24B363226956}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManager.Tests", "BankManager.Tests\BankManager.Tests.csproj", "{3BA52EB9-342E-426B-B391-603276B5B8FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB1EB3B3-E062-47A8-9932-24B363226956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB1EB3B3-E062-47A8-9932-24B363226956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB1EB3B3-E062-47A8-9932-24B363226956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB1EB3B3-E062-47A8-9932-24B363226956}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BA52EB9-342E-426B-B391-603276B5B8FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BA52EB9-342E-426B-B391-603276B5B8FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BA52EB9-342E-426B-B391-603276B5B8FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BA52EB9-342E-426B-B391-603276B5B8FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
