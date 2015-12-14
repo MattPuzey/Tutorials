@@ -10,19 +10,17 @@ using NUnit.Framework.Internal;
 namespace BankManager.Tests
 {
     [TestFixture]
-    public class TellerTests : BaseTestClass
+    public class TellerTests 
     {
 
         private Teller _teller;
         private AccountRepository _accountRepository;
 
         [SetUp]
-        public override void Setup()
+        public void Setup()
         {
-            base.Setup();
             _accountRepository = Mock.Of<AccountRepository>();
             _teller = new Teller(_accountRepository);
-            Logging.Logger = Mock.Of<ILogger>();
         }
 
         [Test]

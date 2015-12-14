@@ -4,18 +4,15 @@ using NUnit.Framework;
 
 namespace BankManager.Tests
 {
-    public class AccountRepositoryTests : BaseTestClass
+    [TestFixture]
+    public class AccountRepositoryTests
     {
-
-        private Teller _teller;
         private AccountRepository _accountRepository;
 
         [SetUp]
-        public override void Setup()
+        public  void Setup()
         {
-            base.Setup();
             _accountRepository = new AccountRepository();
-            _teller = new Teller(_accountRepository);
         }
         [Test]
         public void GetBalance_WithNoTransactions_Returns0Balance()

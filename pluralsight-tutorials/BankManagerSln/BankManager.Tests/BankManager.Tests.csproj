@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountRepositoryTests.cs" />
-    <Compile Include="BaseTestClass.cs" />
+    <Compile Include="GlobalBankManagerTestsSetUpAndTearDown.cs" />
     <Compile Include="TellerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
