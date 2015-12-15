@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
@@ -42,9 +43,13 @@ namespace BankManager.Tests
         public void ProcessTransaction_TransactionValueGiven_TellerSubmitsGivenTransactionToTheRepository()
         {
             var transaction = new SimpleTransaction(10);
+            var processTransactionTrigger = new ManualResetEvent(false);
+            Mock.Get(_accountRepository).Setup(x => x.ProcessTransaction(transaction))
+                .Callback(() => processTransactionTrigger.Set());   
 
             _teller.ProcessTransaction(transaction);
 
+            processTransactionTrigger.WaitOne(TimeSpan.FromSeconds(1));
              Mock.Get(_accountRepository).Verify(x => x.ProcessTransaction(transaction), Times.Once(),
                  "The Teller should forward the process transaction request to the repository.");
         }

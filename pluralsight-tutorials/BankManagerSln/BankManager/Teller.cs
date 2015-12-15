@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BankManager
@@ -24,12 +25,18 @@ namespace BankManager
             Logging.WriteLine("Checking the user's balance,");
             return _accountRepository.GetBalance();
         }
-            
-        public int ProcessTransaction(Transaction transaction)
+
+        public void ProcessTransaction(Transaction transaction)
         {
-            Logging.WriteLine("Processing a transaction of £" + transaction.CalculateTotalTransaction());
-            _accountRepository.ProcessTransaction(transaction);
-            return CheckBalance();  
+            Task.Factory.StartNew(() =>
+            {
+
+                Thread.Sleep(100);
+                Logging.WriteLine("Processing a transaction of £"
+                                  + transaction.CalculateTotalTransaction());
+                _accountRepository.ProcessTransaction(transaction);
+            });
+
         }
     }
 }
