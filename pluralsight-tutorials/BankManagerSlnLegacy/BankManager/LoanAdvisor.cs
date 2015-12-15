@@ -7,7 +7,6 @@ namespace BankManager
     {
         public static LoanDetails RequestApprovalFor(int loanAmount, int yearlyIncome, int currentDebt)
         {
-            Thread.Sleep(new Random().Next(5000));
             var isApproved = loanAmount < yearlyIncome - currentDebt;
             var amountApproved = isApproved ? loanAmount : 0;
             int termLength;

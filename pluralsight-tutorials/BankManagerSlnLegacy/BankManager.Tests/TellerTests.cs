@@ -91,16 +91,6 @@ namespace BankManager.Tests
 
         }
             
-        //Exists for refactoring purposes 
-        [Test]
-        public void RequestLoan_GoldenMaster()
-        {
-            var loanDetails = _teller.RequestLoan(100, 201, 100);
-            Assert.That(loanDetails.IsApproved);
-
-            loanDetails = _teller.RequestLoan(100, 200, 100);
-            Assert.That(loanDetails.IsApproved, Is.False);
-
-        }
+    
     }
 }

@@ -51,6 +51,7 @@
     <Compile Include="BaseTestClass.cs" />
     <Compile Include="FeeTransactionTests.cs" />
     <Compile Include="GlobalBankManagerTestsSetUpAndTearDown.cs" />
+    <Compile Include="LoanAdvisorTests.cs" />
     <Compile Include="SimpleTransactionTests.cs" />
     <Compile Include="TellerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
