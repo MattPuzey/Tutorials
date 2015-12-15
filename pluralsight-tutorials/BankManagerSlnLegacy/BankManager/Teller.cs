@@ -41,17 +41,22 @@ namespace BankManager
             });
         }
 
-        public LoanDetails RequestLoan(int loanAmount, int yearlyIncome, int currentDebt)
+        // Layer of abstraction around Advisor instantiation so we are able to control the dependency of the RequetsLoan method
+        protected virtual LoanAdvisorWrapper GetLoanAdvisor()
         {
-            return new LoanAdvisorWrapper().RequestLoan(loanAmount, yearlyIncome, currentDebt);
+            return new LoanAdvisorWrapper();
         }
 
-       
+        public LoanDetails RequestLoan(int loanAmount, int yearlyIncome, int currentDebt)
+        {
+            return GetLoanAdvisor().RequestLoan(loanAmount, yearlyIncome, currentDebt);
+        }
+        
     }
 
     public class LoanAdvisorWrapper
     {
-        public LoanDetails RequestLoan(int loanAmount, int yearlyIncome, int currentDebt)
+        public virtual LoanDetails RequestLoan(int loanAmount, int yearlyIncome, int currentDebt)
         {
             return LoanAdvisor.RequestApprovalFor(loanAmount, yearlyIncome, currentDebt);
         }

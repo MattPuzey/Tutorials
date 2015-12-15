@@ -8,6 +8,21 @@ using NUnit.Framework;
 
 namespace BankManager.Tests
 {
+
+    public class TellerOverride : Teller
+        // only the dependecy should be overriden in this non-production implementation
+    {
+        public TellerOverride(AccountRepository accountRepository) : base(accountRepository) {}
+
+        public LoanAdvisorWrapper LoanAdvisor { get; set; }
+
+        //We can override the GetLoanAdvisor factory method and return a property value if it exists which can be controlled by the setter. 
+        protected override LoanAdvisorWrapper GetLoanAdvisor()
+        {
+            return LoanAdvisor ?? base.GetLoanAdvisor();
+        }
+    }
+
     [TestFixture]
     public class TellerTests
     {
@@ -19,7 +34,7 @@ namespace BankManager.Tests
         public void SetUp()
         {
             _accountRepository = Mock.Of<AccountRepository>();
-            _teller = new Teller(_accountRepository);
+            _teller = new TellerOverride(_accountRepository);
 
             Mock.Get(_accountRepository).Setup(x => x.GetBalance()).Returns(NonZeroBalance);
         }
@@ -63,6 +78,20 @@ namespace BankManager.Tests
             Assert.Fail("Null account repository did not throw an exception");
         }
 
+        [Test]
+        public void RequestLoan_ForwardsTheLoanrRequestParametersToTheLoanAdvisor()
+        {
+            var loanAdvisorWrapper = Mock.Of<LoanAdvisorWrapper>();
+            (_teller as TellerOverride).LoanAdvisor = loanAdvisorWrapper;
+
+            _teller.RequestLoan(1, 1, 1);
+
+            Mock.Get(loanAdvisorWrapper).Verify(x => x.RequestLoan(1, 1, 1), Times.Once,
+                "Teller is expected to call the advisor with the same parameters    ");
+
+        }
+            
+        //Exists for refactoring purposes 
         [Test]
         public void RequestLoan_GoldenMaster()
         {
