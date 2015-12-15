@@ -21,5 +21,10 @@ namespace BankManager
         {
             return BaseAmount - _fee;
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + "; Fee = " + _fee;
+        }
     }
 }

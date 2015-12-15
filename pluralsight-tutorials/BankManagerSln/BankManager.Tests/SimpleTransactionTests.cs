@@ -16,7 +16,7 @@ namespace BankManager.Tests
             return new SimpleTransaction(baseAmount);
         }
 
-        [Test]
+        [Test] 
         public void CalculateTotalTransaction_AmountProvided_ReturnsSameAmount()
         {
             const int baseAmount = 100;
