@@ -5,9 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.Dnx.Runtime;
-using Microsoft.Framework.Configuration;
-using Microsoft.Framework.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using TheWorld.Services;
+using TheWorld.Models;
+using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
 
 namespace TheWorld
 {
@@ -16,7 +20,7 @@ namespace TheWorld
     public static IConfigurationRoot Configuration;
 
     public Startup(IApplicationEnvironment appEnv)
-    {
+    {   
       var builder = new ConfigurationBuilder()
         .SetBasePath(appEnv.ApplicationBasePath)
         .AddJsonFile("config.json")
@@ -28,7 +32,21 @@ namespace TheWorld
     // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(opt =>
+                {
+                    opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                }
+                );
+
+            services.AddLogging();
+
+            services.AddEntityFramework()
+                      .AddSqlServer()
+                      .AddDbContext<WorldContext>();
+
+            services.AddTransient<WorldContextSeedData>();
+            services.AddScoped<IWorldRepository, WorldRepository>();
 
 #if DEBUG
       services.AddScoped<IMailService, DebugMailService>();
@@ -37,8 +55,10 @@ namespace TheWorld
 #endif
     }
 
-    public void Configure(IApplicationBuilder app)
+    public void Configure(IApplicationBuilder app, WorldContextSeedData seeder, ILoggerFactory loggerFactory)
     {
+            loggerFactory.AddDebug(LogLevel.Warning);
+
       app.UseStaticFiles();
 
       app.UseMvc(config =>
@@ -49,6 +69,8 @@ namespace TheWorld
           defaults: new { controller = "App", action = "Index" }
           );
       });
+
+      seeder.EnsureSeedData();
     }
   }
 }
