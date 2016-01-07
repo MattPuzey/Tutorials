@@ -9,9 +9,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TheWorld.Services;
 using TheWorld.Models;
-using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
+using AutoMapper;
+using TheWorld.ViewModels;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace TheWorld
 {
@@ -45,6 +47,7 @@ namespace TheWorld
                       .AddSqlServer()
                       .AddDbContext<WorldContext>();
 
+            services.AddScoped<CoordService>();
             services.AddTransient<WorldContextSeedData>();
             services.AddScoped<IWorldRepository, WorldRepository>();
 
@@ -60,6 +63,12 @@ namespace TheWorld
             loggerFactory.AddDebug(LogLevel.Warning);
 
       app.UseStaticFiles();
+
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<Trip, TripViewModel>().ReverseMap();
+                config.CreateMap<Stop, StopViewModel>().ReverseMap();
+            });
 
       app.UseMvc(config =>
       {
