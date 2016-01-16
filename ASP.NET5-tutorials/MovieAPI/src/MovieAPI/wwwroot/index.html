@@ -1,30 +1,31 @@
 ﻿<!DOCTYPE html>
 <html ng-app="moviesApp">
 <head>
+    <base href="/">
     <meta charset="utf-8" />
     <title>Movies</title>
 
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap-theme.min.css">
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- AngularJS-->
+
+    <script src="/lib/angular/angular.js"></script>
+    <script src="/lib/angular-resource/angular-resource.js"></script>
+    <script src="/lib/angular-route/angular-route.js"></script>
 
     <script src="app.js"></script>
+    <script src="moviesController.js"></script>
+    <script src="moviesService.js"></script>
 </head>
 <body ng-cloak>
-    <div ng-controller="moviesController">
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Director</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="movie in movies">
-                    <td>{{movie.Title}}</td>
-                    <td>{{movie.Director}}</td>
-                </tr>
-            </tbody>
-        </table>
-
+    <div class="container-fluid">
+        <ng-view></ng-view>
     </div>
 </body>
 </html>
