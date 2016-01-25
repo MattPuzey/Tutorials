@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNet.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.Framework.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,8 +68,8 @@ namespace TheWorld.Controllers.Api
                     newStop.Longitude = coordResult.Longitude;
                     newStop.Latitude = coordResult.Latitude;
                     // Save to the database
-                    _repository.AddStop(tripName, newStop);
-
+                    _repository.AddStop(WebUtility.UrlDecode(tripName), newStop);
+ 
                     if (_repository.SaveAll())
                     {
                         Response.StatusCode = (int)HttpStatusCode.Created;

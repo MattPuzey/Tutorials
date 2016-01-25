@@ -1,51 +1,26 @@
 ﻿<div>
-
     <h1>List Movies</h1>
-    <div class="col-md-4">
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Director</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="movie in movies">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th ng-show="canEdit"></th>
+                <th>Title</th>
+                <th>Director</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="movie in movies">
+                <td ng-show="canEdit">
+                    <a href="/movies/edit/{{movie.Id}}" class="btn btn-default btn-xs">edit</a>
+                    <a href="/movies/delete/{{movie.Id}}" class="btn btn-danger btn-xs">delete</a>
+                </td>
+                <td>{{movie.Title}}</td>
+                <td>{{movie.Director}}</td>
+            </tr>
+        </tbody>
+    </table>
 
-                    <td class="col-xs-2">{{movie.Title}}</td>
-                    <td class="col-xs-2">{{movie.Director}}</td>
-                    <td class="col-xs-2">
-                        <a href="/movies/edit/{{movie.Id}}" class="btn btn-primary btn-xs">edit</a>
-                        <a href="/movies/delete/{{movie.Id}}" class="btn btn-danger btn-xs">delete</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    
-    <div class="col-md-4">
-        <div class="col-md-5">
-
-            <form ng-submit="edit()">
-                <div class="form-group">
-                    <label for="Title">Movie Title</label>
-                    <input name="Title" type="text" class="form-control" placeholder="Enter title" ng-model="movie.Title">
-                </div>
-                <div class="form-group
-                <label for="Director">Director</label>
-                <input name="Director" type="text" class="form-control" placeholder="Enter director" ng-model="movie.Director">
-            </div>
-                <a href="/" class="btn btn-default">Cancel</a>
-                <button type="submit" class="btn btn-primary">Save</button>
-            </form>
-
-
-        </div>
-    </div>
-    <div class="col-lg-12">
-        <p>
-            <a href="/movies/add" class="btn btn-success">Add New Movie</a>
-        </p>
-    </div>
+    <p ng-show="canEdit">
+        <a href="/movies/add" class="btn btn-primary">Add New Movie</a>
+    </p>
 </div>

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNet.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.Framework.Logging;
 using System;
 using System.Collections;
 using System.Collections.Generic;

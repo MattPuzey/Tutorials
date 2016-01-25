@@ -5,6 +5,6 @@
   },
 
   "Data": {
-    "WorldContextConnection": "Server=.;Database=TheWorldDB;Trusted_Connection=true;MultipleActiveResultSets=true;"
+    "WorldContextConnection": "Server=.;Database=TheWorldMine;Trusted_Connection=true;MultipleActiveResultSets=true;"
   }	
 }

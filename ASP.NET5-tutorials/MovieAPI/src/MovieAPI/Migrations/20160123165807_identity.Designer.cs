@@ -8,9 +8,10 @@ using MovieAPI.Models;
 namespace MovieAPI.Migrations
 {
     [DbContext(typeof(MoviesAppContext))]
-    partial class MoviesAppContextModelSnapshot : ModelSnapshot
+    [Migration("20160123165807_identity")]
+    partial class identity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")

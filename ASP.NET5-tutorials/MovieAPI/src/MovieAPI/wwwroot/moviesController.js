@@ -9,10 +9,13 @@
         .controller('MoviesDeleteController', MoviesDeleteController)
         .controller('DatePickerController', DatePickerController);
 
-    /* Movies List Controller  */
-    MoviesListController.$inject = ['$scope', 'Movie'];
+    /* Movies List Controller  
+    The canEdit value is injected into the controller and assigned to the controller’s scope. 
+    This makes the canEdit value available in the AngularJS list view which is used to display the list of movies: */
+    MoviesListController.$inject = ['$scope', 'Movie', 'canEdit'];
 
-    function MoviesListController($scope, Movie) {
+    function MoviesListController($scope, Movie, canEdit) {
+        $scope.canEdit = canEdit;
         $scope.movies = Movie.query();
     }
 

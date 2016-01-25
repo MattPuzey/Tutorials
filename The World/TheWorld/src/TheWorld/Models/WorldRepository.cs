@@ -1,5 +1,5 @@
 ﻿using Microsoft.Data.Entity;
-using Microsoft.Extensions.Logging;
+using Microsoft.Framework.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +22,7 @@ namespace TheWorld.Models
         {
             var theTrip = GetTripByName(tripName);
             newStop.Order = theTrip.Stops.Max(s => s.Order) + 1;
+            theTrip.Stops.Add(newStop);
             _context.Stops.Add(newStop);
         }
 
